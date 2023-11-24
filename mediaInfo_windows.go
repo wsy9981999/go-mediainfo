@@ -2,6 +2,7 @@ package go_mediainfo
 
 import (
 	"errors"
+	"strings"
 	"syscall"
 	"unsafe"
 
@@ -51,7 +52,7 @@ func (m *MediaInfo) Destroy() error {
 	return nil
 }
 func (m *MediaInfo) Open(name string) error {
-	ptr, err := strToPtr(name)
+	ptr, err := strToPtr(strings.ReplaceAll(name, "\\", "/"))
 	if err != nil {
 		return err
 	}
